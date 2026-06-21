@@ -1,23 +1,17 @@
 defaultNamespace: default
 
 targetCustomizations:
-  # Rule 1: If the cluster has the label dr-state=active, deploy normally (replicas: 1)
+  # Rule 1: If the cluster is Active, deploy normally
   - name: prod-active
     clusterSelector:
       matchLabels:
         dr-state: active
 
-  # Rule 2: If the cluster has the label dr-state=standby, force the replicas to 0
+  # Rule 2: If the cluster is Standby, look in the 'standby' folder for patches
   - name: prod-standby
     clusterSelector:
       matchLabels:
         dr-state: standby
     yaml:
       overlays:
-        - apiVersion: apps/v1
-          kind: Deployment
-          name: escape-pod
-          patches:
-            - op: replace
-              path: /spec/replicas
-              value: 0
+        - standby
