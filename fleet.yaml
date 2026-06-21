@@ -7,11 +7,10 @@ targetCustomizations:
       matchLabels:
         dr-state: active
 
-  # Rule 2: If the cluster is Standby, look in the 'standby' folder for patches
+  # Rule 2: If the cluster is Standby, explicitly merge the patch
   - name: prod-standby
     clusterSelector:
       matchLabels:
         dr-state: standby
-    yaml:
-      overlays:
-        - overlays/standby
+    kustomize:
+      dir: overlays/standby
