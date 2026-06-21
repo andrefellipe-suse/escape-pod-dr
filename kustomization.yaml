@@ -1,4 +1,2 @@
 resources:
-  - ../../
-patchesStrategicMerge:
-  - app_patch.yaml
+  - app.yaml
