@@ -14,4 +14,4 @@ targetCustomizations:
         dr-state: standby
     yaml:
       overlays:
-        - standby
+        - overlays/standby
